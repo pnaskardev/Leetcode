@@ -32,18 +32,11 @@ public:
         {
             res.push_back(make_pair(binary(mat[i]),i));
         }
-        // for(auto i:res)
-        // {
-        //     cout<<i.first<<" "<<i.second<<endl;
-        //     // cout<<i<<" ";
-        // }
         sort(res.begin(),res.end());
         for(int i=0;i<k;i++)
         {
             resfinal.push_back(res[i].second);
         }
-        
-        // cout<<endl;
         return resfinal;
     }
 };
