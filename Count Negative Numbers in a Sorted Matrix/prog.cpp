@@ -19,6 +19,7 @@ class Solution
                 ans=arr.size()-1-mid+1;
                 end=mid-1;
             }
+            return ans;
         }
         // for(int i=0;i<arr.size();i++)
         // {
