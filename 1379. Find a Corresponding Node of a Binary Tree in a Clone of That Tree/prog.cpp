@@ -30,36 +30,33 @@ TreeNode *createTree(const vector<int> &values, int index)
 
 class Solution
 {
-    int l, r;
-    int sum = 0;
-    void dfs(TreeNode *root)
+private:
+    TreeNode *ans;
+    void dfs(TreeNode *original, TreeNode *cloned, TreeNode *target)
     {
-        if (root == NULL)
+        if (original == nullptr || cloned == nullptr)
         {
             return;
         }
-        dfs(root->left);
-        if (root->val >= l && root->val <= r)
+        if (cloned->val == target->val)
         {
-            sum += root->val;
+            ans = cloned;
         }
-        dfs(root->right);
+        dfs(original, cloned->left, target);
+        dfs(original, cloned->right, target);
     }
 
 public:
-    int rangeSumBST(TreeNode *root, int low, int high)
+    TreeNode *getTargetCopy(TreeNode *original, TreeNode *cloned, TreeNode *target)
     {
-        l = low;
-        r = high;
-        dfs(root);
-        return sum;
+        dfs(original, cloned, target);
+        return ans;
     }
 };
 
 int main(void)
 {
-    vector<int> arr = {10, 5, 15, 3, 7, NULL, 18};
+    vector<int> arr = {7, 4, 3, NULL, NULL, 6, 19};
+    int target = 3;
     TreeNode *root = createTree(arr, 0);
-    Solution ob;
-    cout << ob.rangeSumBST(root, 7, 15) << endl;
 }
