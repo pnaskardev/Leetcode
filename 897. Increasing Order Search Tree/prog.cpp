@@ -30,25 +30,31 @@ TreeNode *createTree(const vector<int> &values, int index)
 
 class Solution
 {
+private:
+    void dfs(TreeNode*& ans, TreeNode* root) {
+        if (!root) return;
+        dfs(ans, root->left);
+        ans->right = new TreeNode(root->val);
+        ans = ans->right;
+        dfs(ans, root->right);
+    }
+    
 public:
-    bool checkTree(TreeNode *root)
-    {
-        if(root==NULL)
-        {
-            return false;
-        }
-        if(root->val==root->left->val+root->right->val)
-        {
-            return true;
-        }
-        return false;
+    TreeNode* increasingBST(TreeNode* root) {
+        TreeNode* temp;
+        TreeNode* ans = new TreeNode();
+        temp = ans;
+        dfs(ans, root);
+        return temp->right;
     }
 };
 
+
+
 int main(void)
 {
-    vector<int> arr = {10, 4, 6};
+    vector<int> arr = {5, 3, 6, 2, 4, NULL, 8, 1, NULL, NULL, NULL, 7, 9};
     TreeNode *root = createTree(arr, 0);
     Solution ob;
-    cout << ob.checkTree(root) << endl;
+    TreeNode *ans = ob.increasingBST(root);
 }

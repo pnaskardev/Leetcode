@@ -28,27 +28,46 @@ TreeNode *createTree(const vector<int> &values, int index)
     return node;
 }
 
+void inorder(TreeNode *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    inorder(root->left);
+    cout << root->val << " ";
+    inorder(root->right);
+}
+
 class Solution
 {
 public:
-    bool checkTree(TreeNode *root)
+    TreeNode *searchBST(TreeNode *root, int val)
     {
-        if(root==NULL)
+        if (root == NULL)
         {
-            return false;
+            return NULL;
         }
-        if(root->val==root->left->val+root->right->val)
+        if (root->val == val)
         {
-            return true;
+            return root;
         }
-        return false;
+        if (root->val > val)
+        {
+            return searchBST(root->left, val);
+        }
+        
+
+        return searchBST(root->right, val);
     }
 };
 
 int main(void)
 {
-    vector<int> arr = {10, 4, 6};
+    vector<int> arr = {4, 2, 7, 1, 3};
     TreeNode *root = createTree(arr, 0);
+
     Solution ob;
-    cout << ob.checkTree(root) << endl;
+    TreeNode *ans = ob.searchBST(root, 2);
+    inorder(ans);
 }

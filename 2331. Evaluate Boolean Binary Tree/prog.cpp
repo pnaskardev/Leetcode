@@ -31,24 +31,27 @@ TreeNode *createTree(const vector<int> &values, int index)
 class Solution
 {
 public:
-    bool checkTree(TreeNode *root)
+    bool evaluateTree(TreeNode *root)
     {
-        if(root==NULL)
+        if (root == NULL)
         {
             return false;
         }
-        if(root->val==root->left->val+root->right->val)
-        {
+        if (root->val == 0)
+            return false;
+        if (root->val == 1)
             return true;
-        }
-        return false;
+        if (root->val == 2)
+            return evaluateTree(root->left) || evaluateTree(root->right);
+        // if (root->val == 3)
+        return evaluateTree(root->left) && evaluateTree(root->right);
     }
 };
 
 int main(void)
 {
-    vector<int> arr = {10, 4, 6};
+    vector<int> arr = {2, 1, 3, NULL, NULL, 0, 1};
     TreeNode *root = createTree(arr, 0);
     Solution ob;
-    cout << ob.checkTree(root) << endl;
+    cout << ob.evaluateTree(root) << endl;
 }

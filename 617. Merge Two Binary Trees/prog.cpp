@@ -1,5 +1,5 @@
-#include<iostream>
-#include<bits/stdc++.h>
+#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 class TreeNode
@@ -28,29 +28,45 @@ TreeNode *createTree(const vector<int> &values, int index)
     return node;
 }
 
-class Solution {
+void inorder(TreeNode *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    inorder(root->left);
+    cout << root->val << " ";
+    inorder(root->right);
+}
+
+class Solution
+{
 
 public:
-    TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) 
+    TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2)
     {
-        if(root1==NULL && root2==NULL)
+        if (root1 == NULL && root2 == NULL)
             return NULL;
-        if(root1==NULL)
+        if (root1 == NULL)
             return root2;
-        if(root2==NULL)
+        if (root2 == NULL)
             return root1;
-        TreeNode* ans=new TreeNode(root1->val+root2->val);
-        ans->left=mergeTrees(root1->left,root2->left);
-        ans->right=mergeTrees(root1->right,root2->right);
-        return ans;
+
+        root1->left = mergeTrees(root1->left, root2->left);
+        root1->val = root1->val + root2->val;
+        root1->right = mergeTrees(root1->right, root2->right);
+
+        return root1;
     }
 };
 
 int main(void)
 {
-    vector<int>root1={1,3,2,5},root2={2,1,3,NULL,4,NULL,7};
-    TreeNode *r1=createTree(root1,0);
-    TreeNode *r2=createTree(root2,0);
-    Solution s;
-    
+    vector<int> arr1 = {1, 3, 2, 5}, arr2 = {2, 1, 3, NULL, 4, NULL, 7};
+    TreeNode *root1 = createTree(arr1, 0);
+    TreeNode *root2 = createTree(arr2, 0);
+
+    Solution ob;
+    TreeNode *ans = ob.mergeTrees(root1, root2);
+    inorder(ans);
 }
