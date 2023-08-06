@@ -1,6 +1,7 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
+
 class TreeNode
 {
 public:
@@ -30,22 +31,21 @@ TreeNode *createTree(const vector<int> &values, int index)
 class Solution
 {
 public:
-    int maxDepth(TreeNode *root)
+    int minDepth(TreeNode *root)
     {
         if (root == NULL)
-        {
             return 0;
-        }
-        // int leftAns = maxDepth(root->left);
-        // int rightAns = maxDepth(root->right);
-        return max( maxDepth(root->left),  maxDepth(root->right)) + 1;
+        int leftAns = minDepth(root->left);
+        int rightAns = minDepth(root->right);
+
+        return 1+ (min(leftAns,rightAns) ? min(leftAns,rightAns): max(leftAns,rightAns));
     }
 };
 
 int main(void)
 {
-    vector<int> values = {3, 9, 20, NULL, NULL, 15, 7};
-    TreeNode *root = createTree(values, 0);
-    Solution s;
-    cout << s.maxDepth(root) << endl;
+    vector<int> arr = {3, 9, 20, NULL, NULL, 15, 7};
+    TreeNode *root = createTree(arr, 0);
+    Solution ob;
+    cout << ob.minDepth(root) << endl;
 }
