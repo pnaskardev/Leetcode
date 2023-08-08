@@ -1,5 +1,5 @@
-#include<iostream>
-#include<bits/stdc++.h>
+#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 class TreeNode
@@ -28,32 +28,32 @@ TreeNode *createTree(const vector<int> &values, int index)
     return node;
 }
 
-class Solution {
-    private:
-        bool isMirror(TreeNode *root1, TreeNode *root2)
-        {
-            if(root1==NULL and root2==NULL)
-            {
-                return true;
-            }
-            if(root1==NULL or root2==NULL)
-            {
-                return false;
-            }
-            
-            return (root1->val==root2->val) && (isMirror(root1->left,root2->right)) && (isMirror(root1->left,root2->right));
+class Solution
+{
+private:
+    bool dfs(TreeNode *root1, TreeNode *root2)
+    {
+        if (root1 == NULL and root2 == NULL)
+            return true;
+        if (root1 == NULL or root2 == NULL)
+            return false;
+        
+        return root1->val==root2->val and dfs(root1->left,root2->right) and dfs(root1->right, root2->left);
+    }
 
-        }
 public:
-    bool isSymmetric(TreeNode* root) {
-        return isMirror(root->left,root->right);
+    bool isSymmetric(TreeNode *root)
+    {
+        if (root == NULL)
+            return true;
+        dfs(root->left, root->right);
     }
 };
 
 int main(void)
 {
-    vector<int>arr = {1,2,2,3,4,4,3};
-    TreeNode *root = createTree(arr,0);
+    vector<int> arr = {1, 2, 2, 3, 4, 4, 3};
+    TreeNode *root = createTree(arr, 0);
     Solution s;
-    cout<<s.isSymmetric(root);
+    cout << s.isSymmetric(root);
 }
