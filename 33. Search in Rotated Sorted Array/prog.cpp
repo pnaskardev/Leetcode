@@ -1,46 +1,45 @@
-#include<iostream>
-#include<bits/stdc++.h>
+#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-class Solution 
+class Solution
 {
 public:
-    int search(vector<int>& nums, int target) 
+    int search(vector<int> &nums, int target)
     {
-        int n=nums.size();
-        int l=0,r=nums.size()-1;
-        if(nums[n-1]<target)
+        int n = nums.size();
+        int l = 0, r = nums.size() - 1;
+        if (nums[n - 1] < target)
         {
-            while(l<r)
+            while (l < r)
             {
-                int mid=l+(r-l+1)/2;
-                if(nums[mid]>target || nums[mid]<=nums[n-1])
+                int mid = l + (r - l + 1) / 2;
+                if (nums[mid] > target || nums[mid] <= nums[n - 1])
                 {
-                    r=mid-1;
+                    r = mid - 1;
                 }
                 else
                 {
-                    l=mid;
+                    l = mid;
                 }
-
             }
         }
         else
         {
-            while(l<r)
+            while (l < r)
             {
-                int mid=l+(r-l)/2;
-                if(nums[mid]>nums[n-1] || nums[mid]<target)
+                int mid = l + (r - l) / 2;
+                if (nums[mid] > nums[n - 1] || nums[mid] < target)
                 {
-                    l=mid+1;
+                    l = mid + 1;
                 }
                 else
                 {
-                    r=mid;
+                    r = mid;
                 }
             }
         }
-        if(nums[l]==target)
+        if (nums[l] == target)
         {
             return l;
         }
@@ -50,5 +49,7 @@ public:
 
 int main(void)
 {
-    
+    vector<int> arr = {4, 5, 6, 7, 0, 1, 2};
+    Solution ob;
+    cout << ob.search(arr, 0) << endl;
 }

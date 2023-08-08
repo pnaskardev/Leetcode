@@ -40,11 +40,10 @@ private:
         }
         int leftHeight = height(root->left);
         int rightHeight = height(root->right);
-        if (isValid && abs(leftHeight - rightHeight) > 1)
-        {
-            isValid = false;
-        }
-        return 1 + max(leftHeight, rightHeight);
+        
+        if(isValid and abs(leftHeight-rightHeight)>1)
+            isValid=false;
+        return 1+max(leftHeight,rightHeight);
     }
 
 public:

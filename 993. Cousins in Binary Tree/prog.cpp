@@ -33,47 +33,7 @@ class Solution
 public:
     bool isCousins(TreeNode *root, int x, int y)
     {
-        queue<TreeNode *> q;
-        q.push(root);
-        while(q.empty()==false)
-        {
-            int n=q.size();
-            bool x_found=false;
-            bool y_found=false;
-
-            for(int i=0;i<n;i++)
-            {
-                TreeNode* temp=q.front();
-                q.pop();
-
-                if(temp->val==x)
-                    x_found=true;
-                if(temp->val==y)
-                    y_found=true;
-                
-                if(temp->left!=NULL && temp->right!=NULL)
-                {
-                    if(temp->left->val==x && temp->right->val==y)
-                        return false;
-                    if(temp->left->val==y && temp->right->val==x)
-                        return false;
-                }
-
-                if(temp->left!=NULL)
-                {
-                    q.push(temp->left);
-                }
-                if(temp->right!=NULL)
-                {
-                    q.push(temp->right);
-                }
-
-            }
-
-            if(x_found==true && y_found==true)
-                return true;
-        }
-        return false;
+       
     }
 };
 
